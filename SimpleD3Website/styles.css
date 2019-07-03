@@ -1,0 +1,122 @@
+@charset "utf-8";
+#nav_area {
+	zoom: 1;
+	height: 50px;
+	padding: 0px 0px 0px 80px;
+	background: linear-gradient(rgba(78,29,76,0.90),rgba(119,52,96,1.0));
+	line-height: 48px;
+	float: none;
+}
+.nav_a_normal{
+	width: 160px;
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	color: white;
+	font-size: 20px;
+}
+.nav_a_normal:hover{
+	cursor: pointer;
+	background: linear-gradient(#8B008B,#9400D3); /* 导航栏移上时的颜色需要调整 */
+}
+.nav_a_selected{
+	width: 160px;
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	color: white;
+	font-size: 20px;
+	background: linear-gradient(rgba(128,0,128,1.00), rgba(244,13,100,0.80));
+}
+#main_area {
+	height: 600px;
+}
+#search_area {
+	position: relative;
+	width: 20%;
+	height: inherit;
+	background: #f8f8f8;
+	border-width: 1px;
+	border-style: solid;
+	border-color: mediumpurple;
+	float: left;
+}
+#query_area {
+	position: relative;
+	float: left;
+	height: 150px;
+	/*background: black;*/
+	text-align: center;
+}
+#graph_area {
+	position: relative;
+	left: 10px;
+	top: 0px;
+	width: 77%;
+	height: inherit;
+	float: left;
+	z-index: 0;
+}
+#query_area #src_name {
+	position: relative;
+	top: 10px;
+	width: 80%;
+}
+#query_area #dest_name {
+	position: relative;
+	top: 20px;
+	width: 80%;
+}
+input {
+	border: 1px solid #ccc;
+	padding: 7px 0px;
+	border-radius: 3px;
+	padding-left: 5px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+}
+input:focus {
+	border-color: #66afe9;
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+}
+
+#input_button{
+	position: relative;
+	top: 35px;
+}
+
+
+button { /* 按钮美化 */
+	width: 80%; /* 宽度 */
+	height: 40px; /* 高度 */
+	border-width: 0px; /* 边框宽度 */
+	border-radius: 3px; /* 边框半径 */
+	background: #1E90FF; /* 背景颜色 */
+	cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+	outline: none; /* 不显示轮廓线 */
+	font-family: Microsoft YaHei; /* 设置字体 */
+	color: white; /* 字体颜色 */
+	font-size: 20px; /* 字体大小 */
+}
+button:hover { /* 鼠标移入按钮范围时改变颜色 */
+	background: #5599FF;
+}
+
+.result_area_normal{
+	height: 70%;
+	width: 91%;
+	resize: none;
+	background: white;
+	margin: 0px 10px 0px 10px;
+	border: 1px solid #ccc;
+	padding: 7px 0px;
+	border-radius: 3px;
+	padding-left: 5px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
