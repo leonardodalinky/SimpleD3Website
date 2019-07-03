@@ -7,8 +7,8 @@ var g_searchBoxIndex = 0; // 0代表起点框，1代表终点框
 function gb_graph_connected_component() {
 	// 重置画图区域内的图形
 	document.getElementById("graph_area").innerHTML = "";
-	var width = window.innerWidth * 0.75;
-	var height = 600;
+	var width = innerWidth;
+	var height = innerHeight * 1.1;
 	var cc_data_trans = gb_dataTransform(cc_data, 0); // 让数据符合d3规范
 
 	var pack = d3.layout.pack()
@@ -86,8 +86,8 @@ function gb_graph_connected_component() {
 function gb_graph_spanning_tree() {
 	// 重置画图区域内的图形
 	document.getElementById("graph_area").innerHTML = "";
-	var width = window.innerWidth * 0.75;
-	var height = 600;
+	var width = "100%";
+	var height = "100%";
 	var st_data_trans = gb_dataTransform(st_data, 1); // 让数据符合d3规范
 
 	var zoom = d3.behavior.zoom().scaleExtent([0.1, 8]).on("zoom", function zoomed() {
@@ -102,7 +102,7 @@ function gb_graph_spanning_tree() {
 		.attr("height", height);
 
 	var g = svg.append("g")
-		.attr("transform", "translate(200,0)scale(0.4)")
+		.attr("transform", "translate(0,0)scale(0.2)")
 		.call(zoom)
 		.append("g"); // 两个g层，前一个用于缩放平移，后一个用于添加圆形图
 
@@ -222,8 +222,8 @@ function gb_graph_spanning_tree() {
 function gb_graph_dijkstra() {
 	// 重置画图区域内的图形
 	document.getElementById("graph_area").innerHTML = "";
-	var width = window.innerWidth * 0.75;
-	var height = 600;
+	var width = "100%";
+	var height = "100%";
 	var st_data_trans = gb_dataTransform(st_data, 1); // 让数据符合d3规范
 
 	var zoom = d3.behavior.zoom().scaleExtent([0.1, 8]).on("zoom", function zoomed() {
@@ -238,7 +238,7 @@ function gb_graph_dijkstra() {
 		.attr("height", height);
 
 	var g = svg.append("g")
-		.attr("transform", "translate(200,0)scale(0.4)")
+		.attr("transform", "translate(0,0)scale(0.2)")
 		.call(zoom)
 		.append("g"); // 两个g层，前一个用于缩放平移，后一个用于添加圆形图
 

@@ -21,7 +21,7 @@ function gb_dijkstra(Vs,Ve)
 	var kp=Vs;//记录下一个搜索节点
 	var minn=0x3f3f3f3f;//记录每次搜索中最短路的长度
 	var mark_num=0;//搜索过的节点的个数
-	var result=new Array();//最终的路径
+	var result_raw=new Array();//最终的路径
 
 	while(true)
 	{
@@ -62,18 +62,21 @@ function gb_dijkstra(Vs,Ve)
 	//输出部分
 	if(r_min[Ve]==0x3f3f3f3f)
 	{
-		return result;
+		// Do nothing.
 	}
 	else
 	{
 		var p=Ve;
 		while(p!=Vs)
 		{
-			result.push(p);
+			result_raw.push(p);
 			p=c[p];
 		}
-		result.push(Vs);
-		return result;
+		result_raw.push(Vs);
 	}//输出部分结束
 	
+	var ans = {"cost":0, "path": null};
+	ans.path = result_raw;
+	ans.cost = r_min[Ve];
+	return ans;
 }

@@ -29,7 +29,7 @@
 	background: linear-gradient(rgba(128,0,128,1.00), rgba(244,13,100,0.80));
 }
 #main_area {
-	height: 600px;
+	height: 800px;
 }
 #search_area {
 	position: relative;
@@ -108,7 +108,7 @@ button:hover { /* 鼠标移入按钮范围时改变颜色 */
 }
 
 .result_area_normal{
-	height: 70%;
+	height: 76%;
 	width: 91%;
 	resize: none;
 	background: white;

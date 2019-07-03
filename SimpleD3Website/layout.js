@@ -9,6 +9,7 @@ function gb_nav_onAClick(index) {
 	document.getElementById("result_area").value = null; // 清空查询框中内容
 	document.getElementById("src_name").value = null;
 	document.getElementById("dest_name").value = null;
+	g_searchTime = 0;
 	g_selectedNavIndex = index;
 	var str_obj_id = "nav_a_" + String(index);
 	var nav_a_obj = document.getElementById(str_obj_id);
@@ -77,13 +78,15 @@ function gb_search_cc() {
 			break;
 		}
 	}
+	
+	g_searchTime++;
 
 	if (index_tuple1[0] == -1 || index_tuple2[0] == -1) {
 		d3.select("#result_area").append("div")
-			.text("查无此路径！");
+			.text(g_searchTime + ".  查无此人！\n");
 	} else if (index_tuple1[0] == index_tuple2[0]) {
-		let ans = str1 + "与" + str2
-			+ "在同一连通支\n";
+		let ans = g_searchTime + ".  " + str1 + "与" + str2
+			+ "在同一个圈子内\n";
 		document.getElementById("result_area").value += ans;
 		d3.selectAll("circle")
 			.attr("fill", "rgb(31, 119, 180)")
@@ -95,8 +98,8 @@ function gb_search_cc() {
 			})
 			.attr("fill", "rgb(255,0,0)");
 	} else {
-		let ans = str1 + "与" + str2
-			+ "不在同一连通支\n";
+		let ans = g_searchTime + ".  " + str1 + "与" + str2
+			+ "不在同一个圈子内\n";
 		document.getElementById("result_area").value += ans;
 	}
 }
@@ -108,14 +111,16 @@ function gb_search_st() {
 	var element2 = gb_nameToIndex(str2);
 
 	var roadpath = _search_road_st(element1, element2);
+	
+	g_searchTime++;
 
 	if (roadpath.length == 0) {
-		let ans = "  " + str1 + "与" + str2
-			+ "不在同一连通支\n";
+		let ans = g_searchTime + ".  " + str1 + "与" + str2
+			+ "不在同一圈子内或此人不存在\n";
 		document.getElementById("result_area").value += ans;
 	} else {
 		// 设置字符串
-		let ans = "  从" + str1 + "至" + str2 + "共" + String(roadpath.length) + "人，分别为：" + gb_indexToName(roadpath[0]);
+		let ans = g_searchTime + ".  " + "从" + str1 + "传播至" + str2 + "共经过" + String(roadpath.length) + "人，分别为：" + gb_indexToName(roadpath[0]);
 		for (let i = 1; i < roadpath.length; i++) {
 			ans += ("、" + gb_indexToName(roadpath[i]))
 		}
@@ -138,22 +143,24 @@ function gb_search_dij() {
 	var element1 = gb_nameToIndex(str1);
 	var element2 = gb_nameToIndex(str2);
 
-	var roadpath = gb_dijkstra(element1, element2);
+	var roadpath_raw = gb_dijkstra(element1, element2);
+	
+	g_searchTime++;
 
-	if (roadpath.length == 0) {
-		let ans = "  " + str1 + "与" + str2
-			+ "不在同一连通支\n";
+	if (roadpath_raw.path.length == 0) {
+		let ans = g_searchTime + ".  " +  str1 + "与" + str2
+			+ "不在同一圈子内或此人不存在\n";
 		document.getElementById("result_area").value += ans;
 	} else {
 		// 设置字符串
-		let ans = "  从" + str1 + "至" + str2 + "的最短路径共" + String(roadpath.length) + "人，分别为：" + gb_indexToName(roadpath[roadpath.length - 1]);
-		for (let i = roadpath.length - 2; i >= 0; i--) {
-			ans += ("、" + gb_indexToName(roadpath[i]))
+		let ans = g_searchTime + ".  " + "从" + str1 + "至" + str2 + "的最小委托花费为" + roadpath_raw.cost + "，路径共经过" + String(roadpath_raw.path.length) + "人，分别为：" + gb_indexToName(roadpath_raw.path[roadpath_raw.path.length - 1]);
+		for (let i = roadpath_raw.path.length - 2; i >= 0; i--) {
+			ans += ("、" + gb_indexToName(roadpath_raw.path[i]))
 		}
 		ans += '\n';
 		document.getElementById("result_area").value += ans;
 
-		gb_highlightPath_dij(roadpath);
+		gb_highlightPath_dij(roadpath_raw.path);
 		/*
 		d3.selectAll("circle").filter(function(d,i){
 			return (roadpath.indexOf(d.name) != -1)
