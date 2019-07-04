@@ -102,7 +102,7 @@ function gb_graph_spanning_tree() {
 		.attr("height", height);
 
 	var g = svg.append("g")
-		.attr("transform", "translate(0,0)scale(0.2)")
+		.attr("transform", "translate(550,300)scale(0.2)")
 		.call(zoom)
 		.append("g"); // 两个g层，前一个用于缩放平移，后一个用于添加圆形图
 
@@ -129,7 +129,7 @@ function gb_graph_spanning_tree() {
 		.attr("cy", function (d, i) {
 			return gb_circleCenterY(i);
 		})
-		.attr("r", 20)
+		.attr("r", 22)
 		.on("mouseover", function (d, i) {
 			if (d3.select(this).attr("fill") != "rgb(255,0,0)"
 			   && d3.select(this).attr("fill") != "rgb(0,0,0)"
@@ -238,7 +238,7 @@ function gb_graph_dijkstra() {
 		.attr("height", height);
 
 	var g = svg.append("g")
-		.attr("transform", "translate(0,0)scale(0.2)")
+		.attr("transform", "translate(550,300)scale(0.2)")
 		.call(zoom)
 		.append("g"); // 两个g层，前一个用于缩放平移，后一个用于添加圆形图
 
@@ -265,7 +265,7 @@ function gb_graph_dijkstra() {
 		.attr("cy", function (d, i) {
 			return gb_circleCenterY(i);
 		})
-		.attr("r", 20)
+		.attr("r", 22)
 		.on("mouseover", function (d, i) {
 			if (d3.select(this).attr("fill") != "rgb(255,0,0)"
 			   && d3.select(this).attr("fill") != "rgb(0,0,0)"
@@ -406,12 +406,16 @@ function gb_indexToMovie(index) {
 
 // 返回第index个圆的圆心X坐标
 function gb_circleCenterX(index) {
-	return parseInt(index % 150) * 40;
+	var theta = index * 3;
+	var r = 25 * Math.sqrt(theta);
+	return parseInt(r * Math.cos(theta));
 }
 
 // 返回第index个圆的圆心Y坐标
 function gb_circleCenterY(index) {
-	return parseInt(index / 150) * 40;
+	var theta = index * 3;
+	var r = 25 * Math.sqrt(theta);
+	return parseInt(r * Math.sin(theta));
 }
 
 // 返回从下标为index1到index2的点之间的最小生成树路径

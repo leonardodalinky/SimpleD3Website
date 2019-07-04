@@ -119,6 +119,10 @@ function gb_search_st() {
 			+ "不在同一圈子内或此人不存在\n";
 		document.getElementById("result_area").value += ans;
 	} else {
+		// 清除残留的线
+		d3.selectAll("line").attr("keyline","0")
+			.style("visibility","hidden");
+		
 		// 设置字符串
 		let ans = g_searchTime + ".  " + "从" + str1 + "传播至" + str2 + "共经过" + String(roadpath.length) + "人，分别为：" + gb_indexToName(roadpath[0]);
 		for (let i = 1; i < roadpath.length; i++) {
@@ -152,6 +156,10 @@ function gb_search_dij() {
 			+ "不在同一圈子内或此人不存在\n";
 		document.getElementById("result_area").value += ans;
 	} else {
+		// 清除残留的线
+		d3.selectAll("line").attr("keyline","0")
+			.style("visibility","hidden");
+		
 		// 设置字符串
 		let ans = g_searchTime + ".  " + "从" + str1 + "至" + str2 + "的最小委托花费为" + roadpath_raw.cost + "，路径共经过" + String(roadpath_raw.path.length) + "人，分别为：" + gb_indexToName(roadpath_raw.path[roadpath_raw.path.length - 1]);
 		for (let i = roadpath_raw.path.length - 2; i >= 0; i--) {
